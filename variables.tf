@@ -25,7 +25,6 @@ variable "security_admin_config" {
   type = list(object({
     name                                          = optional(string)
     vnet_manager_id                               = optional(string)
-    delete_existing_peering_enabled               = optional(bool)
     description                                   = optional(string)
     apply_on_network_intent_policy_based_services = optional(list(string))
   }))

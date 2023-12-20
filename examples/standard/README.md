@@ -124,7 +124,7 @@ module "spoke_nsg" {
 
 
 module "vnet_manager_config" {
-  source = "../../"
+  source = "cyber-scot/virtual-network-manager-configuration/azurerm"
 
   connectivity_config = [
     {
@@ -146,6 +146,15 @@ module "vnet_manager_config" {
           resource_id = module.hub_network.vnet_id
         }
       ]
+    }
+  ]
+
+  security_admin_config = [
+    {
+      name                                          = "SecConfig1"
+      vnet_manager_id                               = module.vnet_manager.network_manager_id
+      apply_on_network_intent_policy_based_services = ["None"]
+      description                                   = "Sec config 1"
     }
   ]
 }
@@ -172,7 +181,7 @@ No requirements.
 | <a name="module_spoke_network"></a> [spoke\_network](#module\_spoke\_network) | cyber-scot/network/azurerm | n/a |
 | <a name="module_spoke_nsg"></a> [spoke\_nsg](#module\_spoke\_nsg) | cyber-scot/nsg/azurerm | n/a |
 | <a name="module_vnet_manager"></a> [vnet\_manager](#module\_vnet\_manager) | cyber-scot/virtual-network-manager/azurerm | n/a |
-| <a name="module_vnet_manager_config"></a> [vnet\_manager\_config](#module\_vnet\_manager\_config) | ../../ | n/a |
+| <a name="module_vnet_manager_config"></a> [vnet\_manager\_config](#module\_vnet\_manager\_config) | cyber-scot/virtual-network-manager-configuration/azurerm | n/a |
 
 ## Resources
 

@@ -123,7 +123,7 @@ module "spoke_nsg" {
 
 
 module "vnet_manager_config" {
-  source = "../../"
+  source = "cyber-scot/virtual-network-manager-configuration/azurerm"
 
   connectivity_config = [
     {
@@ -145,6 +145,15 @@ module "vnet_manager_config" {
           resource_id = module.hub_network.vnet_id
         }
       ]
+    }
+  ]
+
+  security_admin_config = [
+    {
+      name                                          = "SecConfig1"
+      vnet_manager_id                               = module.vnet_manager.network_manager_id
+      apply_on_network_intent_policy_based_services = ["None"]
+      description                                   = "Sec config 1"
     }
   ]
 }
