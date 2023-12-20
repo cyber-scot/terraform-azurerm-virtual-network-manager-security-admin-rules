@@ -1,13 +1,3 @@
-output "connectivity_config_ids" {
-  description = "A map of connectivity configuration names to their respective IDs."
-  value       = { for config in azurerm_network_manager_connectivity_configuration.connectivity_config : config.name => config.id }
-}
-
-output "connectivity_topologies" {
-  description = "A map of connectivity configuration names to their connectivity topologies."
-  value       = { for config in azurerm_network_manager_connectivity_configuration.connectivity_config : config.name => config.connectivity_topology }
-}
-
 output "connectivity_config_applied_groups" {
   description = "Details of groups each connectivity configuration is applied to."
   value = { for config in azurerm_network_manager_connectivity_configuration.connectivity_config :
@@ -20,14 +10,14 @@ output "connectivity_config_applied_groups" {
   }
 }
 
-output "security_admin_config_ids" {
-  description = "A map of security admin configuration names to their respective IDs."
-  value       = { for config in azurerm_network_manager_security_admin_configuration.sec_configs : config.name => config.id }
+output "connectivity_config_ids" {
+  description = "A map of connectivity configuration names to their respective IDs."
+  value       = { for config in azurerm_network_manager_connectivity_configuration.connectivity_config : config.name => config.id }
 }
 
-output "security_admin_config_descriptions" {
-  description = "A map of security admin configuration names to their descriptions."
-  value       = { for config in azurerm_network_manager_security_admin_configuration.sec_configs : config.name => config.description }
+output "connectivity_topologies" {
+  description = "A map of connectivity configuration names to their connectivity topologies."
+  value       = { for config in azurerm_network_manager_connectivity_configuration.connectivity_config : config.name => config.connectivity_topology }
 }
 
 output "security_admin_config_apply_on_policy_services" {
@@ -37,3 +27,12 @@ output "security_admin_config_apply_on_policy_services" {
   }
 }
 
+output "security_admin_config_descriptions" {
+  description = "A map of security admin configuration names to their descriptions."
+  value       = { for config in azurerm_network_manager_security_admin_configuration.sec_configs : config.name => config.description }
+}
+
+output "security_admin_config_ids" {
+  description = "A map of security admin configuration names to their respective IDs."
+  value       = { for config in azurerm_network_manager_security_admin_configuration.sec_configs : config.name => config.id }
+}

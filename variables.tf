@@ -20,36 +20,13 @@ variable "connectivity_config" {
   }))
 }
 
-
 variable "security_admin_config" {
   description = "A list of security admin configuration"
   type = list(object({
-    name                            = optional(string)
-    vnet_manager_id                 = optional(string)
-    delete_existing_peering_enabled = optional(bool)
-    description                     = optional(string)
+    name                                          = optional(string)
+    vnet_manager_id                               = optional(string)
+    delete_existing_peering_enabled               = optional(bool)
+    description                                   = optional(string)
     apply_on_network_intent_policy_based_services = optional(list(string))
   }))
 }
-
-
-#variable "location" {
-#  description = "The location where resources will be created."
-#  type        = string
-#}
-#
-#variable "name" {
-#  type        = string
-#  description = "The name of the AVNM instance"
-#}
-#
-#variable "rg_name" {
-#  description = "The name of the resource group."
-#  type        = string
-#}
-#
-#variable "tags" {
-#  description = "A map of tags to add to all resources."
-#  type        = map(string)
-#  default     = {}
-#}
