@@ -1,38 +1,38 @@
-output "connectivity_config_applied_groups" {
-  description = "Details of groups each connectivity configuration is applied to."
-  value = { for config in azurerm_network_manager_connectivity_configuration.connectivity_config :
-    config.name => [for group in config.applies_to_group : {
-      group_connectivity  = group.group_connectivity
-      network_group_id    = group.network_group_id
-      global_mesh_enabled = group.global_mesh_enabled
-      use_hub_gateway     = group.use_hub_gateway
-    }]
-  }
+output "admin_rule_collection_description" {
+  description = "The description of the Network Manager Admin Rule Collection"
+  value       = var.create_rule_collection ? azurerm_network_manager_admin_rule_collection.rule_collections[0].description : null
 }
 
-output "connectivity_config_ids" {
-  description = "A map of connectivity configuration names to their respective IDs."
-  value       = { for config in azurerm_network_manager_connectivity_configuration.connectivity_config : config.name => config.id }
+output "admin_rule_collection_id" {
+  description = "The ID of the Network Manager Admin Rule Collection"
+  value       = var.create_rule_collection ? azurerm_network_manager_admin_rule_collection.rule_collections[0].id : null
 }
 
-output "connectivity_topologies" {
-  description = "A map of connectivity configuration names to their connectivity topologies."
-  value       = { for config in azurerm_network_manager_connectivity_configuration.connectivity_config : config.name => config.connectivity_topology }
+output "admin_rules" {
+  description = "Details of the Network Manager Admin Rules"
+  value = [for rule in azurerm_network_manager_admin_rule.rules : {
+    name                    = rule.name
+    action                  = rule.action
+    direction               = rule.direction
+    priority                = rule.priority
+    protocol                = rule.protocol
+    source_port_ranges      = rule.source_port_ranges
+    destination_port_ranges = rule.destination_port_ranges
+    description             = rule.description
+  }]
 }
 
-output "security_admin_config_apply_on_policy_services" {
-  description = "Details of the apply_on_network_intent_policy_based_services setting for each security admin configuration."
-  value = { for config in azurerm_network_manager_security_admin_configuration.sec_configs :
-    config.name => config.apply_on_network_intent_policy_based_services
-  }
+output "network_manager_deployment_configuration_ids" {
+  description = "The configuration IDs used in the Network Manager Deployment"
+  value       = var.create_deployment ? azurerm_network_manager_deployment.deploy_rules[0].configuration_ids : null
 }
 
-output "security_admin_config_descriptions" {
-  description = "A map of security admin configuration names to their descriptions."
-  value       = { for config in azurerm_network_manager_security_admin_configuration.sec_configs : config.name => config.description }
+output "network_manager_deployment_id" {
+  description = "The ID of the Network Manager Deployment"
+  value       = var.create_deployment ? azurerm_network_manager_deployment.deploy_rules[0].id : null
 }
 
-output "security_admin_config_ids" {
-  description = "A map of security admin configuration names to their respective IDs."
-  value       = { for config in azurerm_network_manager_security_admin_configuration.sec_configs : config.name => config.id }
+output "network_manager_deployment_location" {
+  description = "The location of the Network Manager Deployment"
+  value       = var.create_deployment ? azurerm_network_manager_deployment.deploy_rules[0].location : null
 }

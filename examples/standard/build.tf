@@ -157,3 +157,42 @@ module "vnet_manager_config" {
     }
   ]
 }
+
+module "vnet_manager_rules" {
+  source = "../../"
+
+  create_rule_collection      = true
+  rule_collection_name        = "SecurityRuleCollection1"
+  security_admin_config_id    = module.vnet_manager_config.security_admin_config_ids["SecConfig1"]
+  rule_collection_description = "Rules used deployed to production"
+  network_group_ids           = [module.vnet_manager.network_group_ids["Prd"]]
+
+  security_admin_rules = [
+    {
+      name                    = "DenyInternetOutbound"
+      action                  = "Deny"
+      direction               = "Outbound"
+      priority                = 100
+      protocol                = "Any"
+      source_port_ranges      = ["*"]
+      destination_port_ranges = ["*"]
+      description             = "Deny outbound internet access"
+
+      source = [
+        {
+          address_prefix_type = "ServiceTag"
+          address_prefix      = "VirtualNetwork"
+        }
+      ]
+
+      destination = [
+        {
+          address_prefix_type = "ServiceTag"
+          address_prefix      = "Internet"
+        }
+      ]
+    }
+  ]
+}
+
+

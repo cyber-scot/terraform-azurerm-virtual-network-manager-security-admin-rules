@@ -1,31 +1,83 @@
-variable "connectivity_config" {
-  description = "A list of connectivity configuration"
+variable "create_deployment" {
+  type        = bool
+  description = "Whether the module should attempt a deployment"
+  default     = false
+}
+
+variable "create_rule_collection" {
+  type        = bool
+  description = "Whether a rule collection should be made"
+  default     = true
+}
+
+variable "deployment_configuration_ids" {
+  type        = list(string)
+  description = "A list of VNet manager configurations"
+  default     = []
+}
+
+variable "deployment_type" {
+  type        = string
+  description = "The deployment type if deployment is used"
+  default     = null
+}
+
+variable "network_group_ids" {
+  type        = list(string)
+  description = "A list of network groups the rules apply to"
+  default     = []
+}
+
+variable "rule_collection_description" {
+  type        = string
+  description = "The description of the rule collection"
+  default     = null
+}
+
+variable "rule_collection_name" {
+  type        = string
+  description = "The name of the rule collection"
+  default     = null
+}
+
+variable "security_admin_config_id" {
+  type        = string
+  description = "The id of the security admin config"
+  default     = null
+}
+
+variable "security_admin_rules" {
+  description = "A list of security admin rules for network manager"
   type = list(object({
-    name                            = optional(string)
-    connectivity_topology           = optional(string)
-    vnet_manager_id                 = optional(string)
-    description                     = optional(string)
-    delete_existing_peering_enabled = optional(bool)
-    global_mesh_enabled             = optional(bool)
-    applies_to_group = optional(list(object({
-      group_connectivity  = optional(string)
-      network_group_id    = optional(string)
-      global_mesh_enabled = optional(bool)
-      use_hub_gateway     = optional(bool)
+    name                     = string
+    action                   = string
+    admin_rule_collection_id = optional(string)
+    direction                = string
+    priority                 = number
+    protocol                 = string
+    source_port_ranges       = optional(list(string))
+    destination_port_ranges  = optional(list(string))
+    description              = optional(string)
+
+    source = optional(list(object({
+      address_prefix      = string
+      address_prefix_type = string
     })))
-    hub = optional(list(object({
-      resource_id   = optional(string)
-      resource_type = optional(string, "Microsoft.Network/virtualNetworks")
+    destination = optional(list(object({
+      address_prefix      = string
+      address_prefix_type = string
     })))
   }))
 }
 
-variable "security_admin_config" {
-  description = "A list of security admin configuration"
-  type = list(object({
-    name                                          = optional(string)
-    vnet_manager_id                               = optional(string)
-    description                                   = optional(string)
-    apply_on_network_intent_policy_based_services = optional(list(string))
-  }))
+variable "vnet_manager_id" {
+  type        = string
+  description = "The id of the vnet manager"
+  default     = null
+}
+
+variable "vnet_manager_location" {
+  type        = string
+  description = "The location the vnet manager is in"
+  default     = null
 }
