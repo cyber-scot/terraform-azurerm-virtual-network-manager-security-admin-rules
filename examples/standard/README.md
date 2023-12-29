@@ -160,7 +160,7 @@ module "vnet_manager_config" {
 }
 
 module "vnet_manager_rules" {
-  source = "../../"
+  source = "cyber-scot/virtual-network-manager-security-admin-rules/azurerm"
 
   create_rule_collection      = true
   rule_collection_name        = "SecurityRuleCollection1"
@@ -221,7 +221,7 @@ No requirements.
 | <a name="module_spoke_nsg"></a> [spoke\_nsg](#module\_spoke\_nsg) | cyber-scot/nsg/azurerm | n/a |
 | <a name="module_vnet_manager"></a> [vnet\_manager](#module\_vnet\_manager) | cyber-scot/virtual-network-manager/azurerm | n/a |
 | <a name="module_vnet_manager_config"></a> [vnet\_manager\_config](#module\_vnet\_manager\_config) | cyber-scot/virtual-network-manager-configuration/azurerm | n/a |
-| <a name="module_vnet_manager_rules"></a> [vnet\_manager\_rules](#module\_vnet\_manager\_rules) | ../../ | n/a |
+| <a name="module_vnet_manager_rules"></a> [vnet\_manager\_rules](#module\_vnet\_manager\_rules) | cyber-scot/virtual-network-manager-security-admin-rules/azurerm | n/a |
 
 ## Resources
 

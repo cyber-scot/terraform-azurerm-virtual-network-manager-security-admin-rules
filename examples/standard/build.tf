@@ -159,7 +159,7 @@ module "vnet_manager_config" {
 }
 
 module "vnet_manager_rules" {
-  source = "../../"
+  source = "cyber-scot/virtual-network-manager-security-admin-rules/azurerm"
 
   create_rule_collection      = true
   rule_collection_name        = "SecurityRuleCollection1"
