@@ -174,8 +174,8 @@ module "vnet_manager_rules" {
       direction               = "Outbound"
       priority                = 100
       protocol                = "Any"
-      source_port_ranges      = ["*"]
-      destination_port_ranges = ["*"]
+      source_port_ranges      = ["0-65535"] # Using ["*"] raises an error
+      destination_port_ranges = ["0-65535"]
       description             = "Deny outbound internet access"
 
       source = [
