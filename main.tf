@@ -46,5 +46,5 @@ resource "azurerm_network_manager_deployment" "deploy_rules" {
   network_manager_id = var.vnet_manager_id
   location           = var.vnet_manager_location
   scope_access       = var.deployment_type
-  configuration_ids  = var.deployment_configuration_ids != null ? var.deployment_configuration_ids : var.security_admin_config_id
+  configuration_ids  = var.deployment_configuration_ids != null ? var.deployment_configuration_ids : [var.security_admin_config_id]
 }
